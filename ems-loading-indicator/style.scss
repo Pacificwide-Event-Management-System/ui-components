@@ -1,0 +1,26 @@
+.ems-loader {
+  .loader1,
+  .loader2,
+  .loader3 {
+    animation: loader11 0.8s ease-in-out alternate infinite;
+  }
+  .loader1 {
+    animation-delay: 0.48s;
+  }
+  .loader2 {
+    animation-delay: 0.32s;
+  }
+  .loader3 {
+    animation-delay: 0.16s;
+  }
+}
+
+@keyframes loader11 {
+  0% {
+    margin-top: 4px;
+  }
+
+  100% {
+    margin-top: -4px;
+  }
+}

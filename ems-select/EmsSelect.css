@@ -1,0 +1,16 @@
+.ant-select-dropdown {
+  @apply border border-neutral-6 shadow-sm;
+}
+
+.rc-virtual-list-holder-inner {
+  @apply gap-1;
+}
+
+.rc-virtual-list-holder-inner .ant-select-item.ant-select-item-option {
+  @apply rounded-lg;
+}
+
+.rc-virtual-list-holder-inner
+  .ant-select-item.ant-select-item-option.ant-select-item-option-selected {
+  @apply !bg-neutral-6 !text-neutral-1;
+}

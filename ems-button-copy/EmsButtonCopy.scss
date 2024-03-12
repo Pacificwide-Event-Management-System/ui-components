@@ -1,0 +1,48 @@
+.btn-copied,
+.btn-copy {
+    position: relative;
+    cursor: pointer;
+
+    &:hover {
+        .icon-copy {
+            display: none;
+        }
+        
+        .icon-copied {
+            display: block;
+        }
+    }
+}
+
+.icon-copy {
+    display: block;
+}
+
+.icon-copied {
+    display: none;
+}
+
+.btn-copied:hover::before,
+.btn-copy:hover::before {
+    border-radius: 6px;
+    border: 0.5px solid rgba(217, 217, 217, 0.50);
+    background: #FFF;
+    box-shadow: 0px 4px 8px -2px rgba(3, 22, 32, 0.10);
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 20px;
+    padding: 4px 8px;
+    color: rgba(51, 49, 51, 1);
+    opacity: 1;
+    position: absolute;
+    top: -36px;
+    left: 0;
+}
+
+.btn-copy:hover::before {
+    content: 'Copy';
+}
+
+.btn-copied:hover::before {
+    content: 'Copied';
+}

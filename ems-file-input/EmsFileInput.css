@@ -1,0 +1,14 @@
+.ems-file-upload .ant-upload-list.ant-upload-list-text {
+  @apply flex flex-col gap-2;
+}
+
+.ems-file-upload .ant-upload.ant-upload-select {
+  @apply w-full;
+}
+
+.ems-file-upload .custom-upload-input {
+  @apply block w-full overflow-hidden rounded-lg border text-neutral-4;
+  @apply file:!border-0 file:!border-r file:!border-solid file:!border-r-neutral-divider file:!bg-neutral-8 file:!text-neutral-2 file:hover:!bg-neutral-8;
+  @apply hover:border-primary-2;
+  @apply focus:!shadow-[0px_0px_0px_3px_#FC50554D] focus:ring-0 disabled:cursor-not-allowed disabled:opacity-50;
+}
