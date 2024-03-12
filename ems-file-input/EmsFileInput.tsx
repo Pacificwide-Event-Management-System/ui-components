@@ -1,5 +1,5 @@
 import AuthConstant from '@/libs/constants/authConstant';
-import FileModel from '@/models/event/fileModel';
+import FileModel from '@/models/common/fileModel';
 import { setAccessToken, setRefreshToken } from '@/utils/cookieUtils';
 import { Upload, UploadProps } from 'antd';
 import clsx from 'clsx';
