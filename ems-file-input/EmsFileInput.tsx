@@ -59,7 +59,7 @@ const EmsFileInput: FunctionComponent<Props & UploadProps> = (props) => {
 
   const handleRemoveCurrentFiles = (file: UploadFile) => {
     if (file.response) {
-      let index = newUploadedFiles.findIndex((x) => x === file.response);
+      const index = newUploadedFiles.findIndex((x) => x === file.response);
       if (index > -1) {
         newUploadedFiles.splice(index, 1);
         setNewUploadedFiles([...newUploadedFiles]);
