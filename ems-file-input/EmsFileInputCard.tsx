@@ -1,4 +1,5 @@
-import Close from '@/static/close.svg';
+//@ts-expect-error
+import Close from '@/static/close.svg?component';
 import Success from '@/static/success.svg';
 import Upload from '@/static/upload.svg';
 import Warning from '@/static/warning.svg';
@@ -7,7 +8,7 @@ import clsx from 'clsx';
 import { useTranslations } from 'next-intl';
 import Image from 'next/image';
 import Link from 'next/link';
-import { FunctionComponent, ReactElement } from 'react';
+import { FunctionComponent, ReactElement, useMemo } from 'react';
 import EmsTypo from '../ems-typo/EmsTypo';
 
 type Props = {
@@ -15,10 +16,17 @@ type Props = {
   file: UploadFile;
   fileList: object[];
   actions: { download: () => void; preview: () => void; remove: () => void };
+  className?: string;
 };
 
 // Custom components
-const EmsFileInputCard: FunctionComponent<Props> = ({ originNode, file, fileList, actions }) => {
+const EmsFileInputCard: FunctionComponent<Props> = ({
+  className,
+  originNode,
+  file,
+  fileList,
+  actions,
+}) => {
   const t = useTranslations();
 
   const getFileSizeWithUnit = (fileSize: number): string => {
@@ -31,8 +39,35 @@ const EmsFileInputCard: FunctionComponent<Props> = ({ originNode, file, fileList
     }
   };
 
+  const closeIcon = useMemo(
+    () => (
+      <span className="text-primary cursor-pointer" onClick={actions.remove}>
+        <Close />
+      </span>
+    ),
+    [file],
+  );
+
+  if ((file.status as any) === 'uploaded') {
+    return (
+      <div
+        className={clsx(
+          'inline-flex items-center gap-2 rounded-lg border border-neutral-6 bg-neutral-6 px-[6px] py-[2px]',
+          className,
+        )}
+      >
+        <EmsTypo variant="b2" className="text-neutral-2">
+          {file.name}
+        </EmsTypo>
+        {closeIcon}
+      </div>
+    );
+  }
+
   return (
-    <div className={clsx('flex gap-3 rounded-lg border border-neutral-divider px-3 py-2')}>
+    <div
+      className={clsx('flex gap-3 rounded-lg border border-neutral-divider px-3 py-2', className)}
+    >
       <div className="flex items-center justify-center">
         <div className="flex size-9 items-center justify-center">
           {file.status === 'uploading' && (
@@ -71,9 +106,7 @@ const EmsFileInputCard: FunctionComponent<Props> = ({ originNode, file, fileList
               {file.name}
             </EmsTypo>
           )}
-          <span className="text-primary cursor-pointer" onClick={actions.remove}>
-            <Image src={Close.src} alt="close-icon" width={24} height={24} />
-          </span>
+          {closeIcon}
         </div>
         {file.status === 'uploading' && (
           <>
@@ -82,7 +115,7 @@ const EmsFileInputCard: FunctionComponent<Props> = ({ originNode, file, fileList
                 {getFileSizeWithUnit(file.size)}
               </EmsTypo>
               <EmsTypo className="text-primary-3" variant="b4-bold">
-                {file.percent}%
+                {Math.floor(file.percent)}%
               </EmsTypo>
             </div>
             <div>

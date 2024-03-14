@@ -1,7 +1,7 @@
 import AuthConstant from '@/libs/constants/authConstant';
 import FileModel from '@/models/common/fileModel';
 import { setAccessToken, setRefreshToken } from '@/utils/cookieUtils';
-import { Upload, UploadProps } from 'antd';
+import { Upload, UploadFile, UploadProps } from 'antd';
 import clsx from 'clsx';
 import Cookies from 'js-cookie';
 import { useTranslations } from 'next-intl';
@@ -15,6 +15,8 @@ type Props = {
   textInputClassName?: string;
   onChange?: (value: FileModel[]) => void;
   value?: FileModel[];
+
+  onNewFilesChange?: (files: string[]) => void;
 
   maxSize?: number; //in bytes
 
@@ -32,31 +34,56 @@ const EmsFileInput: FunctionComponent<Props & UploadProps> = (props) => {
     Cookies.get(AuthConstant.AccessTokenCookieName),
   );
 
-  const [uploadedFiles, setUploadedFiles] = useState<FileModel[]>(props.value ?? []);
-
-  const uploadProps: UploadProps = {
-    action: uploadPath,
-    defaultFileList: uploadedFiles?.map((file) => {
+  // const [uploadedFiles, setUploadedFiles] = useState<FileModel[]>(props.value ?? []);
+  const [uploadedFiles, setUploadedFiles] = useState<UploadFile[]>(
+    props.value?.map((file) => {
       return {
         uid: file.id,
         name: file.fileName,
-        status: 'done',
+        status: 'uploaded' as any,
         url: file.filePath,
         response: file,
       };
-    }),
+    }) ?? [],
+  );
+
+  const [newUploadedFiles, setNewUploadedFiles] = useState<string[]>([]);
+
+  const handleRemoveUploadedFiles = (file: UploadFile) => {
+    const index = props.value?.findIndex((x) => x.id === file.uid);
+    if (index > -1) {
+      props.value.splice(index, 1);
+      props.onChange?.([...props.value]);
+    }
+  };
+
+  const handleRemoveCurrentFiles = (file: UploadFile) => {
+    if (file.response) {
+      let index = newUploadedFiles.findIndex((x) => x === file.response);
+      if (index > -1) {
+        newUploadedFiles.splice(index, 1);
+        setNewUploadedFiles([...newUploadedFiles]);
+        props.onNewFilesChange?.([...newUploadedFiles]);
+      }
+    }
+  };
+
+  const uploadProps: UploadProps = {
+    action: uploadPath,
+    fileList: uploadedFiles,
     headers: {
       Authorization: `Bearer ${accessToken}`,
     },
     async onChange(info) {
+      setUploadedFiles(info.fileList);
       if (info.file?.status === 'error' && info.file?.error?.status === 401) {
         await refreshToken();
         setAccessToken(Cookies.get(AuthConstant.AccessTokenCookieName));
       } else if (info.file?.status === 'done' && props.onChange) {
-        const response = info.file?.response as FileModel;
-        uploadedFiles.push(response);
-        setUploadedFiles([...uploadedFiles]);
-        props.onChange([...uploadedFiles]);
+        const response = info.file?.response as string;
+        newUploadedFiles.push(response);
+        setNewUploadedFiles([...newUploadedFiles]);
+        props.onNewFilesChange([...newUploadedFiles]);
       }
       if (info.fileList.some((x) => x.status === 'uploading')) {
         props.uploadStatusHandling?.(true);
@@ -64,13 +91,18 @@ const EmsFileInput: FunctionComponent<Props & UploadProps> = (props) => {
         props.uploadStatusHandling?.(false);
       }
     },
+
     onRemove(file) {
-      const index = uploadedFiles.findIndex((x) => x.id === file.uid);
+      handleRemoveUploadedFiles(file);
+      handleRemoveCurrentFiles(file);
+
+      const index = uploadedFiles.findIndex((x) => x.uid === file.uid);
       if (index > -1) {
         uploadedFiles.splice(index, 1);
         setUploadedFiles([...uploadedFiles]);
-        props.onChange?.([...uploadedFiles]);
       }
+
+      return true;
     },
     beforeUpload(file) {
       const fileExtension = file.name.split('.').pop();
