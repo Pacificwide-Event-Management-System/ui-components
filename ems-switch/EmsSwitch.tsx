@@ -2,7 +2,7 @@ import { Switch, SwitchProps } from 'antd';
 import clsx from 'clsx';
 import './EmsSwitch.scss';
 
-type Props = {};
+interface Props {}
 
 // Custom components
 function EmsSwitch(props: Props & SwitchProps) {
