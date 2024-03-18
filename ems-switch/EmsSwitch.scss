@@ -1,0 +1,6 @@
+.ems-switch .ant-switch-inner {
+  @apply flex items-center justify-center;
+  .ant-switch-inner-unchecked {
+    @apply mt-0;
+  }
+}
