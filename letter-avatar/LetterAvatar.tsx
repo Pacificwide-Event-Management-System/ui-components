@@ -9,19 +9,23 @@ interface LetterAvatarProps {
 
 const LetterAvatar: React.FC<LetterAvatarProps & AvatarProps> = ({ letter, ...props }) => {
   const getBackgroundClassName = useMemo(() => {
-    const normalizedLetter = letter.normalize('NFD').replace(/[\u0300-\u036f]/g, '');
-    const letterCode = normalizedLetter[0].toLowerCase();
-    const isLetterCodeValid = /^[a-zA-Z]$/.test(letterCode);
-    if (isLetterCodeValid) {
-      return `background-letter-avatar background-letter-avatar--${letterCode.toLowerCase()}`;
-    } else {
-      return `background-letter-avatar background-letter-avatar--default`;
+    let result = `background-letter-avatar background-letter-avatar--default`;
+    if (letter) {
+      const normalizedLetter = letter.normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+      const letterCode = normalizedLetter[0].toLowerCase();
+      const isLetterCodeValid = /^[a-zA-Z]$/.test(letterCode);
+
+      if (isLetterCodeValid) {
+        result = `background-letter-avatar background-letter-avatar--${letterCode.toLowerCase()}`;
+      }
     }
+
+    return result;
   }, [letter]);
 
   return (
     <Avatar {...props} className={clsx(getBackgroundClassName, props.className)}>
-      {letter[0].toUpperCase()}
+      {letter ? letter[0].toUpperCase() : null}
     </Avatar>
   );
 };
