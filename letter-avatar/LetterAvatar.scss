@@ -1,0 +1,86 @@
+.background-letter-avatar {
+  @apply text-[#FFFFFF];
+
+  &--default {
+    @apply bg-[#FF8D8D];
+  }
+
+  &--a {
+    @apply bg-[#FF8D8D];
+  }
+  &--b {
+    @apply bg-[#FFCDAA] text-[#525252];
+  }
+  &--c {
+    @apply bg-[#F57382];
+  }
+  &--d {
+    @apply bg-[#D1AA8D];
+  }
+  &--e {
+    @apply bg-[#E19196];
+  }
+  &--f {
+    @apply bg-[#E781BC];
+  }
+  &--g {
+    @apply bg-[#FFB6A1];
+  }
+  &--h {
+    @apply bg-[#CCB796];
+  }
+  &--i {
+    @apply bg-[#DCEBC3] text-[#525252];
+  }
+  &--j {
+    @apply bg-[#419BD2];
+  }
+  &--k {
+    @apply bg-[#FFE6C8] text-[#525252];
+  }
+  &--l {
+    @apply bg-[#F0B95F];
+  }
+  &--m {
+    @apply bg-[#EBE673];
+  }
+  &--n {
+    @apply bg-[#EBDCC3] text-[#525252];
+  }
+  &--o {
+    @apply bg-[#CCAAB5];
+  }
+  &--p {
+    @apply bg-[#CD5078];
+  }
+  &--q {
+    @apply bg-[#FFD28C];
+  }
+  &--r {
+    @apply bg-[#FFD4D9] text-[#525252];
+  }
+  &--s {
+    @apply bg-[#BAB9BE];
+  }
+  &--t {
+    @apply bg-[#D2A3A6];
+  }
+  &--u {
+    @apply bg-[#EBDCD2] text-[#525252];
+  }
+  &--v {
+    @apply bg-[#FFD2D7] text-[#525252];
+  }
+  &--w {
+    @apply bg-[#AAA5A5];
+  }
+  &--x {
+    @apply bg-[#69785F];
+  }
+  &--y {
+    @apply bg-[#D1B9DA];
+  }
+  &--z {
+    @apply bg-[#C7C7D0];
+  }
+}
