@@ -75,7 +75,11 @@ const EmsPagination: FunctionComponent<Props> = (props) => {
       <div className="flex items-center gap-3">
         <Select
           className="flex h-8 items-center justify-center rounded-lg border-[1px] !bg-neutral-6 px-3 !text-neutral-2 hover:!bg-neutral-5 hover:!text-neutral-1"
-          value={options.find((item) => item.value == props.currentPageSize)}
+          value={
+            props.minPageSizeTen
+              ? options.find((item) => item.value == props.currentPageSize)
+              : optionsTwo.find((item) => item.value == props.currentPageSize)
+          }
           unstyled
           menuPlacement="auto"
           isSearchable={false}
