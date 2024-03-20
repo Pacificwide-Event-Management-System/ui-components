@@ -15,6 +15,7 @@ const BackIconButton: FunctionComponent<BackIconButtonProps> = ({ onClick, class
         'flex size-9 cursor-pointer items-center justify-center rounded-full border border-neutral-6 bg-neutral-8',
         className,
       )}
+      onClick={onClick}
     >
       <Image
         className="cursor-pointer"
@@ -22,7 +23,6 @@ const BackIconButton: FunctionComponent<BackIconButtonProps> = ({ onClick, class
         src={LeftArrow.src}
         width={16}
         height={16}
-        onClick={onClick}
       />
     </div>
   );
