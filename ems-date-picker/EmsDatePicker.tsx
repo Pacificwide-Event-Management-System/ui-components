@@ -1,6 +1,7 @@
 'use client';
 import { DatePicker } from 'antd';
 import clsx from 'clsx';
+import dayjs from 'dayjs';
 import { HTMLInputTypeAttribute } from 'react';
 import './EmsDatePicker.scss';
 
@@ -19,6 +20,8 @@ type Props = {
   required?: boolean;
   format?: string;
   className?: string;
+  minDate?: Date;
+  maxDate?: Date;
 };
 
 // Custom components
@@ -40,6 +43,8 @@ function EmsDatePicker(props: Props) {
       required={props.required}
       placeholder={props.placeholder}
       disabled={props.disabled}
+      minDate={props.minDate ? dayjs(props.minDate) : undefined}
+      maxDate={props.maxDate ? dayjs(props.maxDate) : undefined}
     />
   );
 }
