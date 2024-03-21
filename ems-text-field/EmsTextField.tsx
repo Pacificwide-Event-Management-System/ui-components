@@ -11,7 +11,6 @@ const EmsTextField = ({
   autoComplete,
   ...restProps
 }: Props) => {
-  console.log(restProps, "restProps");
   return (
     <Input
       {...restProps}
