@@ -1,12 +1,17 @@
-'use client';
-import Close from '@/static/close.svg';
-import Error from '@/static/error.svg';
-import Info from '@/static/info.svg';
-import Success from '@/static/success.svg';
-import Warning from '@/static/warning.svg';
-import Image from 'next/image';
-import { CustomContentProps, ProviderContext, SnackbarContent, useSnackbar } from 'notistack';
-import { forwardRef } from 'react';
+"use client";
+import Close from "@/static/close.svg";
+import Error from "@/static/error.svg";
+import Info from "@/static/info.svg";
+import Success from "@/static/success.svg";
+import Warning from "@/static/warning.svg";
+import Image from "next/image";
+import {
+  CustomContentProps,
+  ProviderContext,
+  SnackbarContent,
+  useSnackbar,
+} from "notistack";
+import { forwardRef } from "react";
 
 let useSnackbarRef: ProviderContext;
 export const SnackbarUtilsConfigurator = () => {
@@ -27,8 +32,8 @@ export const EmsSnackbar = forwardRef<HTMLDivElement, EmsSnackbarProps>(
   ({ id, message, variant, ...props }, ref) => {
     return (
       <SnackbarContent ref={ref} className="flex items-center justify-center">
-        <div className="flex h-7 items-center gap-2 rounded-md border-[0.5px] border-neutral-4 bg-neutral-8 px-2 py-1">
-          {variant == 'success' && (
+        <div className="flex w-max h-7 items-center gap-2 rounded-md border-[0.5px] border-neutral-4 bg-neutral-8 px-2 py-1">
+          {variant == "success" && (
             <>
               <Image src={Success.src} width={16} height={16} alt="" />
               <div className="text-sm font-normal">{message}</div>
@@ -42,7 +47,7 @@ export const EmsSnackbar = forwardRef<HTMLDivElement, EmsSnackbarProps>(
               />
             </>
           )}
-          {variant == 'info' && (
+          {variant == "info" && (
             <>
               <Image src={Info.src} width={16} height={16} alt="" />
               <div className="text-sm font-normal">{message}</div>
@@ -56,7 +61,7 @@ export const EmsSnackbar = forwardRef<HTMLDivElement, EmsSnackbarProps>(
               />
             </>
           )}
-          {variant == 'warning' && (
+          {variant == "warning" && (
             <>
               <Image src={Warning.src} width={16} height={16} alt="" />
               <div className="text-sm font-normal">{message}</div>
@@ -70,10 +75,12 @@ export const EmsSnackbar = forwardRef<HTMLDivElement, EmsSnackbarProps>(
               />
             </>
           )}
-          {variant == 'error' && (
+          {variant == "error" && (
             <>
               <Image src={Error.src} width={16} height={16} alt="" />
-              <div className="text-sm font-normal text-accent-red">{message}</div>
+              <div className="text-sm font-normal text-accent-red">
+                {message}
+              </div>
               <Image
                 src={Close.src}
                 width={20}
@@ -87,30 +94,30 @@ export const EmsSnackbar = forwardRef<HTMLDivElement, EmsSnackbarProps>(
         </div>
       </SnackbarContent>
     );
-  },
+  }
 );
 
-EmsSnackbar.displayName = 'EmsSnackbar';
+EmsSnackbar.displayName = "EmsSnackbar";
 
 const SnackbarUtils = {
   success(msg) {
-    this.toast(msg, { variant: 'success' });
+    this.toast(msg, { variant: "success" });
   },
   warning(msg) {
-    this.toast(msg, { variant: 'warning' });
+    this.toast(msg, { variant: "warning" });
   },
   info(msg) {
-    this.toast(msg, { variant: 'info' });
+    this.toast(msg, { variant: "info" });
   },
   error(msg) {
-    this.toast(msg, { variant: 'error' });
+    this.toast(msg, { variant: "error" });
   },
   toast(msg, props) {
     useSnackbarRef.enqueueSnackbar(msg, {
       ...props,
       anchorOrigin: {
-        vertical: 'top',
-        horizontal: 'center',
+        vertical: "top",
+        horizontal: "center",
       },
     });
   },
