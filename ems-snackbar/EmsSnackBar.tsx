@@ -31,8 +31,11 @@ interface EmsSnackbarProps extends CustomContentProps {
 export const EmsSnackbar = forwardRef<HTMLDivElement, EmsSnackbarProps>(
   ({ id, message, variant, ...props }, ref) => {
     return (
-      <SnackbarContent ref={ref} className="flex items-center justify-center">
-        <div className="flex w-max h-7 items-center gap-2 rounded-md border-[0.5px] border-neutral-4 bg-neutral-8 px-2 py-1">
+      <SnackbarContent
+        ref={ref}
+        className="fixed top-[4.75rem] z-[999999] flex items-center justify-center"
+      >
+        <div className="flex w-max min-h-7 items-center gap-2 rounded-md border-[0.5px] border-neutral-4 bg-neutral-8 px-2 py-1">
           {variant == "success" && (
             <>
               <Image src={Success.src} width={16} height={16} alt="" />

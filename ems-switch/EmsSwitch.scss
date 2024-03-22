@@ -6,7 +6,8 @@
     }
   }
 
-  &.checked {
+  &.checked,
+  &.ant-switch-checked {
     .ant-switch-inner {
       @apply justify-start;
     }
