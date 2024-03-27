@@ -22,7 +22,7 @@ type Props = {
 // Custom components
 const EmsButton: FunctionComponent<Props> = (props) => {
   const getButtonClassName = () => {
-    const common = 'rounded-lg !h-10 !p-3 !text-[1rem] leading-4 flex items-center justify-center';
+    const common = 'rounded-lg !h-10 !p-3 text-[1rem] leading-4 flex items-center justify-center';
     let className = '';
     let hoverClassName = '';
     let focusClassName = '';
@@ -72,15 +72,15 @@ const EmsButton: FunctionComponent<Props> = (props) => {
     switch (props.typoVariant) {
       case 'button-1':
       default: {
-        typoClassName = 'tracking-button-1 text-button-1 font-button leading-button';
+        typoClassName = 'tracking-button-1 !text-button-1 font-button leading-button';
         break;
       }
       case 'button-2': {
-        typoClassName = 'tracking-button-2 text-button-2 font-button leading-button';
+        typoClassName = 'tracking-button-2 !text-button-2 font-button leading-button';
         break;
       }
       case 'button-3': {
-        typoClassName = 'tracking-button-3 text-button-3 font-button leading-button';
+        typoClassName = 'tracking-button-3 !text-button-3 font-button leading-button';
         break;
       }
     }
