@@ -14,6 +14,7 @@ type Props = {
   className?: string;
   onChange?: (value: string) => void;
   value?: string;
+  showMinute?: boolean;
 };
 
 // Custom components
@@ -23,7 +24,8 @@ function EmsTimePicker(props: Props) {
       showSecond={false}
       allowClear={props.allowClear}
       showHour={true}
-      showMinute={true}
+      showMinute={props.showMinute ?? true}
+      showNow={props.showMinute !== false}
       minuteStep={5}
       autoComplete={props.autoComplete ?? 'off'}
       placeholder={props.placeholder}
