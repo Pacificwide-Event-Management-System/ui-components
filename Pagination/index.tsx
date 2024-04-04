@@ -3,31 +3,34 @@ import { Pagination } from 'antd';
 import clsx from 'clsx';
 import { useTranslations } from 'next-intl';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
-import { FunctionComponent, useCallback } from 'react';
+import { FunctionComponent, useCallback, useMemo } from 'react';
 
 type Props = {
   totalData: number;
   className?: string;
+  minPageSizeTen?: boolean;
   minSizePage?: 'optionMin10' | 'optionMin12' | 'optionMin20';
 };
 
 const PaginationCustom: FunctionComponent<Props> = (props) => {
   const t = useTranslations();
 
-  let options;
+  const options = useMemo(() => {
+    if (props.minPageSizeTen === true && !props.minSizePage) {
+      return [10, 20, 30, 40];
+    }
 
-  switch (props.minSizePage) {
-    case 'optionMin10':
-    default:
-      options = [10, 20, 30, 40];
-      break;
-    case 'optionMin12':
-      options = [12, 24, 36, 48];
-      break;
-    case 'optionMin20':
-      options = [20, 40, 60, 80];
-      break;
-  }
+    switch (props.minSizePage) {
+      case 'optionMin10':
+      default:
+        return [10, 20, 30, 40];
+      case 'optionMin12':
+        return [12, 24, 36, 48];
+
+      case 'optionMin20':
+        return [20, 40, 60, 80];
+    }
+  }, [props.minSizePage, props.minPageSizeTen]);
 
   const itemRender: PaginationProps['itemRender'] = (_, type, originalElement) => {
     if (type === 'prev') {
