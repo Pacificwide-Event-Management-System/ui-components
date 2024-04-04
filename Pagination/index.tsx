@@ -8,15 +8,26 @@ import { FunctionComponent, useCallback } from 'react';
 type Props = {
   totalData: number;
   className?: string;
-  minPageSizeTen: boolean;
+  minSizePage?: 'optionMin10' | 'optionMin12' | 'optionMin20';
 };
 
 const PaginationCustom: FunctionComponent<Props> = (props) => {
   const t = useTranslations();
 
-  const options = [10, 20, 30, 40];
+  let options;
 
-  const optionsTwo = [12, 24, 36, 48];
+  switch (props.minSizePage) {
+    case 'optionMin10':
+    default:
+      options = [10, 20, 30, 40];
+      break;
+    case 'optionMin12':
+      options = [12, 24, 36, 48];
+      break;
+    case 'optionMin20':
+      options = [20, 40, 60, 80];
+      break;
+  }
 
   const itemRender: PaginationProps['itemRender'] = (_, type, originalElement) => {
     if (type === 'prev') {
@@ -60,8 +71,8 @@ const PaginationCustom: FunctionComponent<Props> = (props) => {
         showSizeChanger
         defaultCurrent={defaultPage ? defaultPage : 1}
         total={props.totalData}
-        pageSizeOptions={props.minPageSizeTen ? options : optionsTwo}
-        pageSize={pageSizeParam ? pageSizeParam : props.minPageSizeTen ? options[0] : optionsTwo[0]}
+        pageSizeOptions={options}
+        pageSize={pageSizeParam ? pageSizeParam : options[0]}
         onChange={(page, pageSize) => onChange(page, pageSize)}
       />
     </div>
