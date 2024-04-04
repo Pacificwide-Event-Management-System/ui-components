@@ -26,7 +26,6 @@ const PaginationCustom: FunctionComponent<Props> = (props) => {
         return [10, 20, 30, 40];
       case 'optionMin12':
         return [12, 24, 36, 48];
-
       case 'optionMin20':
         return [20, 40, 60, 80];
     }
