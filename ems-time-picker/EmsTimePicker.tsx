@@ -31,6 +31,7 @@ function EmsTimePicker(props: Props) {
       placeholder={props.placeholder}
       required={props.required}
       disabled={props.disabled}
+      needConfirm={false}
       className={clsx(
         'block !h-10 w-full rounded-lg border border-neutral-5 !px-3 !py-2 !text-base text-neutral-1 !outline-[0] hover:border-primary-2',
         'active:border-primary-3 active:[box-shadow:none]',
