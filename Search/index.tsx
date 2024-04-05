@@ -7,7 +7,11 @@ import { useTranslations } from 'next-intl';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import { memo, useCallback } from 'react';
 
-const Search = () => {
+type Props = {
+  placeholder?: string;
+};
+
+const Search = (props: Props) => {
   const t = useTranslations();
 
   const searchParams = useSearchParams();
@@ -37,7 +41,7 @@ const Search = () => {
         type="text"
         onChange={debounce(onSearch, 500)}
         maxLength={255}
-        placeholder={t('common.search_name_or_email')}
+        placeholder={props.placeholder || t('common.search_name_or_email')}
         defaultValue={defaultSearch}
       />
     </div>
