@@ -17,7 +17,11 @@ const Sort = (props: SortProps) => {
   const pathname = usePathname();
   const { push } = useRouter();
   const [orderDesc, setOrderDesc] = useState(
-    searchParams.get('orderDesc')?.toString() === 'true' ? true : false,
+    searchParams.get('orderDesc')?.toString() == undefined
+      ? true
+      : searchParams.get('orderDesc')?.toString() === 'true'
+        ? true
+        : false,
   );
   const defaultValue = searchParams.get('order')?.toString();
 
@@ -52,7 +56,7 @@ const Sort = (props: SortProps) => {
         onClick={handleSortDescChange}
         className={clsx(
           'flex h-9 w-9 cursor-pointer items-center justify-center rounded-full border border-neutral-6 bg-neutral-8',
-          orderDesc ? '' : 'rotate-180',
+          orderDesc ? 'rotate-180' : '',
         )}
       >
         <ArrowSort />
