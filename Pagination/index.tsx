@@ -3,7 +3,7 @@ import { Pagination } from 'antd';
 import clsx from 'clsx';
 import { useTranslations } from 'next-intl';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
-import { FunctionComponent, useCallback, useMemo } from 'react';
+import { FunctionComponent, useCallback, useMemo, memo } from 'react';
 
 type Props = {
   totalData: number;
@@ -81,4 +81,4 @@ const PaginationCustom: FunctionComponent<Props> = (props) => {
   );
 };
 
-export default PaginationCustom;
+export default memo(PaginationCustom);

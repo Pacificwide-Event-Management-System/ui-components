@@ -1,14 +1,16 @@
 import EmsTypo from '@/app/_components/ems-typo/EmsTypo';
 import CloseIcon from '@/static/speaker-event/CloseIcon';
+import clsx from 'clsx';
 import { uniqueId } from 'lodash';
 import { useTranslations } from 'next-intl';
-import { useRef } from 'react';
+import { memo, useRef } from 'react';
 
 type InputFileProps = {
   setFiles: any;
   files: any;
   isMultiple: boolean;
   accept: string;
+  className?: string;
 };
 
 const InputFile = (props: InputFileProps) => {
@@ -27,7 +29,7 @@ const InputFile = (props: InputFileProps) => {
 
   return (
     <>
-      <div className="flex divide-solid rounded-lg border border-neutral-5 bg-neutral-8 px-3">
+      <div className={clsx("flex divide-solid rounded-lg border border-neutral-5 bg-neutral-8 px-3", props.className)}>
         <EmsTypo
           variant="b2"
           className="inline-flex cursor-pointer items-center border-r py-[10px] pr-3"
@@ -76,4 +78,4 @@ const InputFile = (props: InputFileProps) => {
   );
 };
 
-export default InputFile;
+export default memo(InputFile);
