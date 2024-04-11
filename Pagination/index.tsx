@@ -1,15 +1,18 @@
 import type { PaginationProps } from 'antd';
-import { Pagination } from 'antd';
-import clsx from 'clsx';
 import { useTranslations } from 'next-intl';
-import { usePathname, useRouter, useSearchParams } from 'next/navigation';
-import { FunctionComponent, useCallback, useMemo, memo } from 'react';
+import { FunctionComponent, memo, useMemo } from 'react';
+import InMemory from './inMemory';
+import UrlParams from './urlParams';
 
 type Props = {
   totalData: number;
   className?: string;
   minPageSizeTen?: boolean;
   minSizePage?: 'optionMin10' | 'optionMin12' | 'optionMin20';
+  pagingType?: 'in-memory' | 'url';
+  onPagingChange?: (page: number, pageSize: number) => void;
+  currentPage?: number;
+  pageSize?: number;
 };
 
 const PaginationCustom: FunctionComponent<Props> = (props) => {
@@ -49,36 +52,28 @@ const PaginationCustom: FunctionComponent<Props> = (props) => {
     return originalElement;
   };
 
-  const searchParams = useSearchParams();
-  const pathname = usePathname();
-  const { push } = useRouter();
-
-  const defaultPage = Number(searchParams.get('page')?.toString());
-  const pageSizeParam = Number(searchParams.get('pageSize')?.toString());
-
-  const onChange = useCallback(
-    (page, pageSize) => {
-      const params = new URLSearchParams(searchParams);
-      params.set('page', page);
-      params.set('pageSize', pageSize);
-      push(`${pathname}?${params.toString()}`);
-    },
-    [searchParams, pathname],
-  );
-
-  return (
-    <div className={clsx('flex h-8 gap-4', props.className)}>
-      <Pagination
+  if (props.pagingType === 'in-memory') {
+    return (
+      <InMemory
+        className={props.className}
+        totalData={props.totalData}
         itemRender={itemRender}
-        showSizeChanger
-        defaultCurrent={defaultPage ? defaultPage : 1}
-        total={props.totalData}
-        pageSizeOptions={options}
-        pageSize={pageSizeParam ? pageSizeParam : options[0]}
-        onChange={(page, pageSize) => onChange(page, pageSize)}
+        options={options}
+        onPagingChange={props.onPagingChange}
+        currentPage={props.currentPage}
+        pageSize={props.pageSize}
       />
-    </div>
-  );
+    );
+  } else {
+    return (
+      <UrlParams
+        className={props.className}
+        itemRender={itemRender}
+        totalData={props.totalData}
+        options={options}
+      />
+    );
+  }
 };
 
 export default memo(PaginationCustom);
