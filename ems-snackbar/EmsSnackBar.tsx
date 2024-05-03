@@ -33,7 +33,7 @@ export const EmsSnackbar = forwardRef<HTMLDivElement, EmsSnackbarProps>(
     return (
       <SnackbarContent
         ref={ref}
-        className="fixed top-[4.75rem] z-[999999] flex items-center justify-center"
+        className="fixed left-[50%] top-[4.75rem] z-[999999] flex !translate-x-[-50%] items-center justify-center"
       >
         <div className="flex w-max min-h-7 items-center gap-2 rounded-md border-[0.5px] border-neutral-4 bg-neutral-8 px-2 py-1">
           {variant == "success" && (
