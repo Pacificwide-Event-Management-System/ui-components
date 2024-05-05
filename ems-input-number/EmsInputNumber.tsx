@@ -1,8 +1,8 @@
-'use client';
-import { ConfigProvider, InputNumber, InputNumberProps } from 'antd';
-import clsx from 'clsx';
-import { useState } from 'react';
-import './EmsInputNumber.scss';
+"use client";
+import { ConfigProvider, InputNumber, InputNumberProps } from "antd";
+import clsx from "clsx";
+import { useEffect, useState } from "react";
+import "./EmsInputNumber.scss";
 
 type Props = {
   label?: string;
@@ -40,17 +40,21 @@ function EmsInputNumber(props: Props & InputNumberProps) {
       setValue(value);
       props.onChange(value);
     } else {
-      setValue('');
-      props.onChange('');
+      setValue("");
+      props.onChange("");
     }
   };
+
+  useEffect(() => {
+    setValue(props.value);
+  }, [props.value]);
 
   return (
     <ConfigProvider
       theme={{
         components: {
           InputNumber: {
-            activeShadow: '0px 0px 0px 3px #FC50554D',
+            activeShadow: "0px 0px 0px 3px #FC50554D",
           },
         },
       }}
@@ -58,15 +62,15 @@ function EmsInputNumber(props: Props & InputNumberProps) {
       <InputNumber
         {...props}
         value={value}
-        autoComplete={props.autoComplete ?? 'off'}
+        autoComplete={props.autoComplete ?? "off"}
         onChange={handleChange}
         className={clsx(
-          'flex !h-10 w-full items-center rounded-lg border border-neutral-5 !text-base text-neutral-1 !outline-[0] hover:border-primary-2',
-          'active:border-primary-3 active:[box-shadow:none]',
-          'disabled:border-none disabled:!bg-neutral-7 disabled:!text-neutral-3 disabled:hover:border-neutral-5',
-          'focus:shadow-[0px_0px_0px_3px_#FC50554D] focus:ring-0',
-          'overflow-hidden',
-          props.className,
+          "flex !h-10 w-full items-center rounded-lg border border-neutral-5 !text-base text-neutral-1 !outline-[0] hover:border-primary-2",
+          "active:border-primary-3 active:[box-shadow:none]",
+          "disabled:border-none disabled:!bg-neutral-7 disabled:!text-neutral-3 disabled:hover:border-neutral-5",
+          "focus:shadow-[0px_0px_0px_3px_#FC50554D] focus:ring-0",
+          "overflow-hidden",
+          props.className
         )}
       />
     </ConfigProvider>
