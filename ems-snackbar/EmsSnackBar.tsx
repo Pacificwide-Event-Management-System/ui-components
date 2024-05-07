@@ -116,7 +116,7 @@ const SnackbarUtils = {
     this.toast(msg, { variant: "error" });
   },
   toast(msg, props) {
-    useSnackbarRef.enqueueSnackbar(msg, {
+    useSnackbarRef?.enqueueSnackbar?.(JSON.stringify(msg), {
       ...props,
       anchorOrigin: {
         vertical: "top",
