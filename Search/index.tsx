@@ -39,7 +39,7 @@ const Search = (props: Props) => {
           </div>
         }
         type="text"
-        onChange={debounce(onSearch, 500)}
+        onPressEnter={onSearch}
         maxLength={255}
         placeholder={props.placeholder || t('common.search_name_or_email')}
         defaultValue={defaultSearch}
