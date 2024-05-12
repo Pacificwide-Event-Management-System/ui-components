@@ -15,21 +15,14 @@ const EmsTextField = ({ textInputClassName, autoComplete, ...restProps }: Props)
 
   const formatDisplayPhone = (value: string) => {
     // remove non-numeric, non-dash characters
-    let phone = value.replace(/[^\d-]/g, ''); //
+    let phone = value?.replace(/[^\d-]/g, ''); //
     // remove any leading zeros
-    if (phone.length > 0) {
+    if (phone?.length > 0) {
       // Format the phone number in the desired format
-      phone = phone.replace(/^(\d{3})(\d{3})(\d{4,6})$/, '($1) $2-$3');
+      phone = phone?.replace(/^(\d{3})(\d{3})(\d{4,6})$/, '($1) $2-$3');
     }
 
     return phone;
-  };
-
-  const handleChange = (event) => {
-    if (restProps.type === 'tel') {
-      setInputValue(formatDisplayPhone(event.target.value));
-    }
-    restProps.onChange(event.target.value);
   };
 
   return (
@@ -43,7 +36,7 @@ const EmsTextField = ({ textInputClassName, autoComplete, ...restProps }: Props)
         textInputClassName,
       )}
       autoComplete={autoComplete ?? 'off'}
-      {...(type === 'tel' && { value: inputValue, onChange: handleChange })}
+      {...(type === 'tel' && { value: formatDisplayPhone(restProps?.value?.toString()) })}
     />
   );
 };
