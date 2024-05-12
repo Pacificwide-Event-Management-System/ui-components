@@ -28,7 +28,8 @@ const EmsTextField = ({ textInputClassName, autoComplete, ...restProps }: Props)
   const handleChange = (event) => {
     if (restProps.type === 'tel') {
       setInputValue(formatDisplayPhone(event.target.value));
-    } else setInputValue(event.target.value);
+    }
+    restProps.onChange(event.target.value);
   };
 
   return (
