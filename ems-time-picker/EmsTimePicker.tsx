@@ -3,6 +3,7 @@
 import { TimePicker } from 'antd';
 import clsx from 'clsx';
 import dayjs from 'dayjs';
+import { DisabledTimes } from 'rc-picker/lib/interface';
 
 type Props = {
   label?: string;
@@ -15,12 +16,14 @@ type Props = {
   onChange?: (value: string) => void;
   value?: string;
   showMinute?: boolean;
+  disabledTime?: (date: any, range?: 'start' | 'end') => DisabledTimes;
 };
 
 // Custom components
 function EmsTimePicker(props: Props) {
   return (
     <TimePicker
+      disabledTime={props.disabledTime}
       showSecond={false}
       allowClear={props.allowClear}
       showHour={true}
