@@ -1,4 +1,5 @@
 'use client';
+import { DatePickerFormat } from '@/libs/constants/dateConstant';
 import { DatePicker } from 'antd';
 import clsx from 'clsx';
 import dayjs from 'dayjs';
@@ -28,7 +29,7 @@ type Props = {
 function EmsDatePicker(props: Props) {
   return (
     <DatePicker
-      format={'MM/DD/YYYY'}
+      format={DatePickerFormat}
       allowClear={false}
       className={clsx(
         'flex !h-10 w-full items-center rounded-lg border border-neutral-5 px-3 !text-base text-neutral-1 !outline-[0] hover:border-primary-2',

@@ -1,9 +1,10 @@
-"use client";
-import { DatePicker, DatePickerProps } from "antd";
-import clsx from "clsx";
-import dayjs from "dayjs";
-import { FunctionComponent } from "react";
-import "./EmsDateRangePicker.scss";
+'use client';
+import { DatePickerFormat } from '@/libs/constants/dateConstant';
+import { DatePicker, DatePickerProps } from 'antd';
+import clsx from 'clsx';
+import dayjs from 'dayjs';
+import { FunctionComponent } from 'react';
+import './EmsDateRangePicker.scss';
 
 type Props = {
   placeholder?: [string, string];
@@ -17,31 +18,31 @@ type Props = {
 };
 
 const EmsDateRangePicker: FunctionComponent<Props> = (props) => {
-  const disabledDate: DatePickerProps["disabledDate"] = (current, { from }) => {
+  const disabledDate: DatePickerProps['disabledDate'] = (current, { from }) => {
     if (from) {
-      return Math.abs(current.diff(from, "days")) >= props.dateRange;
+      return Math.abs(current.diff(from, 'days')) >= props.dateRange;
     }
     return false;
   };
   return (
     <DatePicker.RangePicker
       minDate={dayjs(props.minDate)}
-      format={"MM/DD/YYYY"}
+      format={DatePickerFormat}
       allowClear={false}
       className={clsx(
-        "flex !h-10 w-full items-center rounded-lg border border-neutral-5 px-3 !text-base text-neutral-1 !outline-[0] hover:border-primary-2",
-        "active:border-primary-3 active:[box-shadow:none]",
-        "disabled:border-none disabled:!bg-neutral-7 disabled:!text-neutral-3 disabled:hover:border-neutral-5",
-        "focus:shadow-[0px_0px_0px_3px_#FC50554D] focus:ring-0",
-        "overflow-hidden"
+        'flex !h-10 w-full items-center rounded-lg border border-neutral-5 px-3 !text-base text-neutral-1 !outline-[0] hover:border-primary-2',
+        'active:border-primary-3 active:[box-shadow:none]',
+        'disabled:border-none disabled:!bg-neutral-7 disabled:!text-neutral-3 disabled:hover:border-neutral-5',
+        'focus:shadow-[0px_0px_0px_3px_#FC50554D] focus:ring-0',
+        'overflow-hidden',
       )}
       value={props.value}
       disabledDate={disabledDate}
       onChange={(value) => props.onChange(value)}
-      autoComplete={props.autoComplete ?? "off"}
+      autoComplete={props.autoComplete ?? 'off'}
       required={props.required}
       placeholder={props.placeholder}
-      separator={"-"}
+      separator={'-'}
       disabled={props.disabled}
     />
   );
