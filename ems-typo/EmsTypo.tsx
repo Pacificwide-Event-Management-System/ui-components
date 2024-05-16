@@ -1,4 +1,5 @@
 import { Typography } from 'antd';
+import { EllipsisConfig } from 'antd/es/typography/Base';
 import clsx from 'clsx';
 import { FunctionComponent, PropsWithChildren } from 'react';
 
@@ -23,48 +24,79 @@ interface EmsTypoProps {
     | 'button-3';
   className?: string;
   onClick?: () => void;
+  ellipsis?: boolean | Omit<EllipsisConfig, 'expandable' | 'rows' | 'onExpand'>;
 }
 
 const EmsTypo: FunctionComponent<EmsTypoProps & PropsWithChildren> = ({
   className,
   variant,
   children,
+  ellipsis,
   onClick,
 }) => {
   switch (variant) {
     default:
-      return <Typography.Text onClick={onClick}>{children}</Typography.Text>;
+      return (
+        <Typography.Text onClick={onClick} ellipsis={ellipsis}>
+          {children}
+        </Typography.Text>
+      );
     case 'h1': {
       return (
-        <Typography.Title onClick={onClick} level={1} className={clsx('typo-h1', className)}>
+        <Typography.Title
+          onClick={onClick}
+          level={1}
+          className={clsx('typo-h1', className)}
+          ellipsis={ellipsis}
+        >
           {children}
         </Typography.Title>
       );
     }
     case 'h2': {
       return (
-        <Typography.Title onClick={onClick} level={2} className={clsx('typo-h2', className)}>
+        <Typography.Title
+          onClick={onClick}
+          level={2}
+          className={clsx('typo-h2', className)}
+          ellipsis={ellipsis}
+        >
           {children}
         </Typography.Title>
       );
     }
     case 'h3': {
       return (
-        <Typography.Title onClick={onClick} level={3} className={clsx('typo-h3', className)}>
+        <Typography.Title
+          onClick={onClick}
+          level={3}
+          className={clsx('typo-h3', className)}
+          ellipsis={ellipsis}
+        >
           {children}
         </Typography.Title>
       );
     }
     case 'h4': {
       return (
-        <Typography.Title onClick={onClick} level={4} className={clsx('typo-h4', className)}>
+        <Typography.Title
+          onClick={onClick}
+          level={4}
+          className={clsx('typo-h4', className)}
+          ellipsis={ellipsis}
+        >
           {children}
         </Typography.Title>
       );
     }
     case 'h5': {
       return (
-        <Typography.Title onClick={onClick} level={5} className={clsx('typo-h5', className)}>
+        <Typography.Title
+          onClick={onClick}
+          level={5}
+          className={clsx('typo-h5', className)}
+          ellipsis={ellipsis}
+        >
           {children}
         </Typography.Title>
       );
@@ -74,77 +106,121 @@ const EmsTypo: FunctionComponent<EmsTypoProps & PropsWithChildren> = ({
     }
     case 'b1': {
       return (
-        <Typography.Text onClick={onClick} className={clsx('typo-b1', className)}>
+        <Typography.Text
+          onClick={onClick}
+          className={clsx('typo-b1', className)}
+          ellipsis={ellipsis}
+        >
           {children}
         </Typography.Text>
       );
     }
     case 'b1-bold': {
       return (
-        <Typography.Text onClick={onClick} className={clsx('typo-b1-bold', className)}>
+        <Typography.Text
+          onClick={onClick}
+          className={clsx('typo-b1-bold', className)}
+          ellipsis={ellipsis}
+        >
           {children}
         </Typography.Text>
       );
     }
     case 'b2': {
       return (
-        <Typography.Text onClick={onClick} className={clsx('typo-b2', className)}>
+        <Typography.Text
+          onClick={onClick}
+          className={clsx('typo-b2', className)}
+          ellipsis={ellipsis}
+        >
           {children}
         </Typography.Text>
       );
     }
     case 'b2-bold': {
       return (
-        <Typography.Text onClick={onClick} className={clsx('typo-b2-bold', className)}>
+        <Typography.Text
+          onClick={onClick}
+          className={clsx('typo-b2-bold', className)}
+          ellipsis={ellipsis}
+        >
           {children}
         </Typography.Text>
       );
     }
     case 'b3': {
       return (
-        <Typography.Text onClick={onClick} className={clsx('typo-b3', className)}>
+        <Typography.Text
+          onClick={onClick}
+          className={clsx('typo-b3', className)}
+          ellipsis={ellipsis}
+        >
           {children}
         </Typography.Text>
       );
     }
     case 'b3-bold': {
       return (
-        <Typography.Text onClick={onClick} className={clsx('typo-b3-bold', className)}>
+        <Typography.Text
+          onClick={onClick}
+          className={clsx('typo-b3-bold', className)}
+          ellipsis={ellipsis}
+        >
           {children}
         </Typography.Text>
       );
     }
     case 'b4': {
       return (
-        <Typography.Text onClick={onClick} className={clsx('typo-b4', className)}>
+        <Typography.Text
+          onClick={onClick}
+          className={clsx('typo-b4', className)}
+          ellipsis={ellipsis}
+        >
           {children}
         </Typography.Text>
       );
     }
     case 'b4-bold': {
       return (
-        <Typography.Text onClick={onClick} className={clsx('typo-b4-bold', className)}>
+        <Typography.Text
+          onClick={onClick}
+          className={clsx('typo-b4-bold', className)}
+          ellipsis={ellipsis}
+        >
           {children}
         </Typography.Text>
       );
     }
     case 'button-1': {
       return (
-        <Typography.Text onClick={onClick} className={clsx('typo-button-1', className)}>
+        <Typography.Text
+          onClick={onClick}
+          className={clsx('typo-button-1', className)}
+          ellipsis={ellipsis}
+        >
           {children}
         </Typography.Text>
       );
     }
     case 'button-2': {
       return (
-        <Typography.Text onClick={onClick} className={clsx('typo-button-2', className)}>
+        <Typography.Text
+          onClick={onClick}
+          className={clsx('typo-button-2', className)}
+          ellipsis={ellipsis}
+        >
           {children}
         </Typography.Text>
       );
     }
     case 'button-3': {
       return (
-        <Typography.Text onClick={onClick} className={clsx('typo-button-3', className)}>
+        <Typography.Text
+          onClick={onClick}
+          className={clsx('typo-button-3', className)}
+          ellipsis={ellipsis}
+        >
           {children}
         </Typography.Text>
       );
