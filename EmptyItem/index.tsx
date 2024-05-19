@@ -1,6 +1,7 @@
 import EmsButton from '@/app/_components/ems-button/EmsButton';
 import EmsTypo from '@/app/_components/ems-typo/EmsTypo';
 import Empty_Item from '@/static/empty-item/empty-item.svg';
+import Empty_Search from '@/static/empty-search/empty-search.svg';
 import { useTranslations } from 'next-intl';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -50,7 +51,11 @@ const EmptyItem: FunctionComponent<EmptyItemProps> = ({
   return (
     <div className="col m-auto mt-[142px] items-center justify-center">
       <div className="relative size-[200px]">
-        <Image alt="Empty item img" src={Empty_Item.src} layout="fill" />
+        <Image
+          alt="Empty item img"
+          src={afterSearch ? Empty_Search.src : Empty_Item.src}
+          layout="fill"
+        />
       </div>
       <EmsTypo className="!mb-3 !mt-10 !leading-7" variant="h5">
         {commonTitle}
