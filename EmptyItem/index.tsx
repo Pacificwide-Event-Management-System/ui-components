@@ -4,7 +4,7 @@ import Empty_Item from '@/static/empty-item/empty-item.svg';
 import { useTranslations } from 'next-intl';
 import Image from 'next/image';
 import Link from 'next/link';
-import { FunctionComponent, memo } from 'react';
+import { FunctionComponent, memo, useMemo } from 'react';
 
 interface EmptyItemProps {
   page: string;
@@ -14,6 +14,9 @@ interface EmptyItemProps {
   createLink?: string;
   isAttendeePage?: boolean;
   isManualEmailPage?: boolean;
+  afterSearch?: boolean;
+  customViewAllTitle?: string;
+  viewAll?: () => void;
 }
 
 const EmptyItem: FunctionComponent<EmptyItemProps> = ({
@@ -24,8 +27,25 @@ const EmptyItem: FunctionComponent<EmptyItemProps> = ({
   createLink,
   isAttendeePage = false,
   isManualEmailPage = false,
+  afterSearch,
+  customViewAllTitle,
+  viewAll,
 }) => {
   const t = useTranslations();
+
+  const commonTitle = useMemo(() => {
+    return t(afterSearch ? 'empty_search.title' : 'empty_item.title', { page: page?.toString() });
+  }, [afterSearch, page, t]);
+
+  const commonDesc = useMemo(() => {
+    return t(afterSearch ? 'empty_search.desc' : 'empty_item.desc', { item: item?.toString() });
+  }, [afterSearch, item, t]);
+
+  const commonViewAll = useMemo(() => {
+    return customViewAllTitle
+      ? customViewAllTitle
+      : t('empty_search.view_all', { item: item?.toString() }) + 's';
+  }, [customViewAllTitle, item, t]);
 
   return (
     <div className="col m-auto mt-[142px] items-center justify-center">
@@ -33,29 +53,39 @@ const EmptyItem: FunctionComponent<EmptyItemProps> = ({
         <Image alt="Empty item img" src={Empty_Item.src} layout="fill" />
       </div>
       <EmsTypo className="!mb-3 !mt-10 !leading-7" variant="h5">
-        {t('empty_item.title', { page: page?.toString() })}
+        {commonTitle}
       </EmsTypo>
       <EmsTypo className="!mb-10 block whitespace-break-spaces text-center" variant="b2">
         {isAttendeePage
           ? t('empty_item.attendee_desc')
           : isManualEmailPage
             ? t('empty_item.manual_email_desc')
-            : t('empty_item.desc', { item: item?.toString() })}
+            : commonDesc}
       </EmsTypo>
-      {createLink ? (
-        <Link href={createLink}>
-          <EmsButton variant="primary" label={titleButton} className="!px-[50px] !py-4" />
-        </Link>
-      ) : (
-        titleButton && (
-          <EmsButton
-            variant="primary"
-            onClick={funcButton}
-            label={titleButton}
-            className="!px-[50px] !py-4"
-          />
-        )
+      {afterSearch && (
+        <EmsButton
+          variant="primary"
+          onClick={viewAll}
+          label={commonViewAll}
+          className="!px-[50px] !py-4"
+        />
       )}
+
+      {!afterSearch &&
+        (createLink ? (
+          <Link href={createLink}>
+            <EmsButton variant="primary" label={titleButton} className="!px-[50px] !py-4" />
+          </Link>
+        ) : (
+          titleButton && (
+            <EmsButton
+              variant="primary"
+              onClick={funcButton}
+              label={titleButton}
+              className="!px-[50px] !py-4"
+            />
+          )
+        ))}
     </div>
   );
 };
