@@ -62,7 +62,9 @@ const EmptyItem: FunctionComponent<EmptyItemProps> = ({
       </EmsTypo>
       <EmsTypo className="!mb-10 block whitespace-break-spaces text-center" variant="b2">
         {isAttendeePage
-          ? t('empty_item.attendee_desc')
+          ? afterSearch
+            ? t('empty_search.attendee_desc')
+            : t('empty_item.attendee_desc')
           : isManualEmailPage
             ? t('empty_item.manual_email_desc')
             : commonDesc}
