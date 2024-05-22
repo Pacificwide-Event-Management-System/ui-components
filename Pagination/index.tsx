@@ -37,16 +37,16 @@ const PaginationCustom: FunctionComponent<Props> = (props) => {
   const itemRender: PaginationProps['itemRender'] = (_, type, originalElement) => {
     if (type === 'prev') {
       return (
-        <span className="block rounded-lg border-transparent px-3 font-medium text-neutral-2 transition duration-200 hover:border-gray-100 hover:bg-gray-100 hover:text-neutral-2 hover:ease-in disabled:!cursor-not-allowed disabled:!bg-inherit disabled:!text-neutral-4">
+        <button className="block rounded-lg border-transparent px-3 font-medium text-neutral-2 transition duration-200 hover:border-gray-100 hover:bg-gray-100 hover:text-neutral-2 hover:ease-in disabled:!cursor-not-allowed disabled:!bg-inherit disabled:!text-neutral-4">
           {t('common.prev')}
-        </span>
+        </button>
       );
     }
     if (type === 'next') {
       return (
-        <span className="block rounded-lg border-transparent px-3 font-medium text-neutral-2 transition duration-200 hover:border-gray-100 hover:bg-gray-100 hover:text-neutral-2 hover:ease-in disabled:!cursor-not-allowed disabled:!bg-inherit disabled:!text-neutral-4">
+        <button className="block rounded-lg border-transparent px-3 font-medium text-neutral-2 transition duration-200 hover:border-gray-100 hover:bg-gray-100 hover:text-neutral-2 hover:ease-in disabled:!cursor-not-allowed disabled:!bg-inherit disabled:!text-neutral-4">
           {t('common.next')}
-        </span>
+        </button>
       );
     }
     return originalElement;
