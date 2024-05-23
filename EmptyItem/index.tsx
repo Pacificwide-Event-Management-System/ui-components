@@ -39,7 +39,14 @@ const EmptyItem: FunctionComponent<EmptyItemProps> = ({
   }, [afterSearch, page, t]);
 
   const commonDesc = useMemo(() => {
-    return t(afterSearch ? 'empty_search.desc' : 'empty_item.desc', { item: item?.toString() });
+    return t(
+      afterSearch
+        ? 'empty_search.desc'
+        : page === 'event'
+          ? 'empty_item.desc_create'
+          : 'empty_item.desc',
+      { item: item?.toString() },
+    );
   }, [afterSearch, item, t]);
 
   const commonViewAll = useMemo(() => {
