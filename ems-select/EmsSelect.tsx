@@ -8,9 +8,7 @@ function EmsSelect(props: SelectProps) {
       {...props}
       className={clsx(
         'h-10 !text-base text-neutral-1',
-        props.disabled
-          ? '[&_.ant-select-selector]:!border-none [&_.ant-select-selector]:!bg-neutral-7'
-          : '',
+        props.disabled ? '[&_.ant-select-selector]:!bg-neutral-7' : '',
         props.className,
       )}
     />
