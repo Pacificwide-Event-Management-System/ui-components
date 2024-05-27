@@ -21,7 +21,8 @@ interface EmsTypoProps {
     | "b4-bold"
     | "button-1"
     | "button-2"
-    | "button-3";
+    | "button-3"
+    | "paragraph";
   className?: string;
   onClick?: () => void;
   ellipsis?: boolean | Omit<EllipsisConfig, "expandable" | "onExpand">;
@@ -152,6 +153,13 @@ const EmsTypo: FunctionComponent<EmsTypoProps & PropsWithChildren> = ({ classNam
         <Typography.Text onClick={onClick} className={clsx("typo-button-3", className)} ellipsis={ellipsis}>
           {children}
         </Typography.Text>
+      );
+    }
+    case "paragraph": {
+      return (
+        <Typography.Paragraph onClick={onClick} className={className} ellipsis={ellipsis}>
+          {children}
+        </Typography.Paragraph>
       );
     }
   }
