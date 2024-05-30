@@ -32,7 +32,7 @@ function EmsDateTimePicker(props: Props & DatePickerProps) {
       className={clsx(
         "flex !h-10 w-full items-center rounded-lg border border-neutral-5 px-3 !text-base text-neutral-1 !outline-[0] hover:border-primary-2",
         "active:border-primary-3 active:[box-shadow:none]",
-        "disabled:border-none disabled:!bg-neutral-7 disabled:!text-neutral-3 disabled:hover:border-neutral-5",
+        props.disabled && "border-neutral-divider !bg-neutral-7 !text-neutral-3 hover:border-neutral-5",
         "focus:shadow-[0px_0px_0px_3px_#FC50554D] focus:ring-0",
         "overflow-hidden"
       )}
