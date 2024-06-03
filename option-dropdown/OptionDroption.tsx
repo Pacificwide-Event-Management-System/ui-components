@@ -8,11 +8,16 @@ type Props = {
 };
 
 const OptionDropdown = (props: Props) => (
-  <Dropdown menu={{ items: props.menu }} trigger={['click']} placement="bottomRight">
+  <Dropdown
+    menu={{ items: props.menu }}
+    trigger={['click']}
+    placement="bottomRight"
+    overlayClassName="[&_.ant-dropdown-menu-submenu-title]:!flex [&_.ant-dropdown-menu-submenu-title]:!w-[204px] [&_.ant-dropdown-menu-sub]: [&_.ant-dropdown-menu-item-active]:!font-semibold"
+  >
     <button
       type="button"
       className={clsx(
-        'group absolute right-4 top-4 flex size-[36px] cursor-pointer items-center justify-center rounded-[50%] border-[2px] border-transparent bg-white hover:border-primary-3',
+        'group absolute right-4 top-4 flex size-[36px] cursor-pointer items-center justify-center rounded-[50%] border-2 border-transparent bg-white hover:border-primary-3',
         props.className,
       )}
     >
