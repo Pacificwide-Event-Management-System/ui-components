@@ -43,6 +43,7 @@ const EmsConfirmationDialog = (props: EmsConfirmationDialogContainerProps) => {
     setDialogOpen(false);
     removeDialog();
     props.resolve(undefined);
+    console.log('test')
   };
 
   return (
