@@ -20,8 +20,8 @@ type Props = {
   required?: boolean;
   format?: string;
   className?: string;
-  minDate: any;
-  maxDate: any;
+  minDate?: any;
+  maxDate?: any;
 };
 
 // Custom components
