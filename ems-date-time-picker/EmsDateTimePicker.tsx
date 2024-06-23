@@ -22,10 +22,11 @@ type Props = {
   className?: string;
   minDate?: any;
   maxDate?: any;
+  defaultValue?: any;
 };
 
 // Custom components
-function EmsDateTimePicker(props: Props & Omit<DatePickerProps, 'minDate' | 'maxDate'>) {
+function EmsDateTimePicker(props: Props & Omit<DatePickerProps, 'minDate' | 'maxDate' | 'defaultValue'>) {
   return (
     <DatePicker
       {...props}
