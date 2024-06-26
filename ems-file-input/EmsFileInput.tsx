@@ -1,17 +1,18 @@
-import AuthConstant from '@/libs/constants/authConstant';
-import FileModel from '@/models/common/fileModel';
-import { setAccessToken, setRefreshToken } from '@/utils/cookieUtils';
-import { Upload, UploadFile, UploadProps } from 'antd';
-import clsx from 'clsx';
-import Cookies from 'js-cookie';
-import { useTranslations } from 'next-intl';
-import { FunctionComponent, ReactNode, useState } from 'react';
-import SnackbarUtils from '../ems-snackbar/EmsSnackBar';
-import './EmsFileInput.css';
-import EmsFileInputCard from './EmsFileInputCard';
+import AuthConstant from "@/libs/constants/authConstant";
+import FileModel from "@/models/common/fileModel";
+import { setAccessToken, setRefreshToken } from "@/utils/cookieUtils";
+import { Upload, UploadFile, UploadProps } from "antd";
+import clsx from "clsx";
+import Cookies from "js-cookie";
+import { useTranslations } from "next-intl";
+import { FunctionComponent, ReactNode, useState } from "react";
+import SnackbarUtils from "../ems-snackbar/EmsSnackBar";
+import "./EmsFileInput.css";
+import EmsFileInputCard from "./EmsFileInputCard";
 
 type Props = {
   helperText?: ReactNode;
+  fileNotSupportedErrorMessage?: string;
   textInputClassName?: string;
   onChange?: (value: FileModel[]) => void;
   value?: FileModel[];
@@ -27,12 +28,10 @@ type Props = {
 
 // Custom components
 const EmsFileInput: FunctionComponent<Props & UploadProps> = (props) => {
-  const t = useTranslations('validate_message');
+  const t = useTranslations("validate_message");
 
   const uploadPath = process.env.NEXT_PUBLIC_BACKEND_API_URL + props.apiUrl + props.uploadUrl;
-  const [accessToken, setAccessToken] = useState<string | null>(
-    Cookies.get(AuthConstant.AccessTokenCookieName),
-  );
+  const [accessToken, setAccessToken] = useState<string | null>(Cookies.get(AuthConstant.AccessTokenCookieName));
 
   // const [uploadedFiles, setUploadedFiles] = useState<FileModel[]>(props.value ?? []);
   const [uploadedFiles, setUploadedFiles] = useState<UploadFile[]>(
@@ -40,11 +39,11 @@ const EmsFileInput: FunctionComponent<Props & UploadProps> = (props) => {
       return {
         uid: file.id,
         name: file.fileName,
-        status: 'uploaded' as any,
+        status: "uploaded" as any,
         url: file.filePath,
         response: file,
       };
-    }) ?? [],
+    }) ?? []
   );
 
   const [newUploadedFiles, setNewUploadedFiles] = useState<string[]>([]);
@@ -76,16 +75,16 @@ const EmsFileInput: FunctionComponent<Props & UploadProps> = (props) => {
     },
     async onChange(info) {
       setUploadedFiles(info.fileList);
-      if (info.file?.status === 'error' && info.file?.error?.status === 401) {
+      if (info.file?.status === "error" && info.file?.error?.status === 401) {
         await refreshToken();
         setAccessToken(Cookies.get(AuthConstant.AccessTokenCookieName));
-      } else if (info.file?.status === 'done' && props.onChange) {
+      } else if (info.file?.status === "done" && props.onChange) {
         const response = info.file?.response as string;
         newUploadedFiles.push(response);
         setNewUploadedFiles([...newUploadedFiles]);
         props.onNewFilesChange([...newUploadedFiles]);
       }
-      if (info.fileList.some((x) => x.status === 'uploading')) {
+      if (info.fileList.some((x) => x.status === "uploading")) {
         props.uploadStatusHandling?.(true);
       } else {
         props.uploadStatusHandling?.(false);
@@ -105,42 +104,33 @@ const EmsFileInput: FunctionComponent<Props & UploadProps> = (props) => {
       return true;
     },
     beforeUpload(file) {
-      const fileExtension = file.name.split('.').pop();
+      const fileExtension = file.name.split(".").pop();
       if (props.maxSize && file.size > props.maxSize) {
-        SnackbarUtils.error(
-          t('file_size_exceeds_xmb', { size: (props.maxSize / (1024 * 1024)).toString() }),
-        );
+        SnackbarUtils.error(t("file_size_exceeds_xmb", { size: (props.maxSize / (1024 * 1024)).toString() }));
         return Upload.LIST_IGNORE;
       } else if (file.type && props.accept?.length && !props.accept.includes(fileExtension)) {
-        SnackbarUtils.error(t('the_uploaded_file_was_not_supported'));
+        SnackbarUtils.error(props.fileNotSupportedErrorMessage ?? t("the_uploaded_file_was_not_supported"));
         return Upload.LIST_IGNORE;
       }
       return true;
     },
     onPreview(file) {
-      console.log('onPreview', file);
+      console.log("onPreview", file);
     },
     itemRender: (originNode, file, currFileList, actions) => {
-      return (
-        <EmsFileInputCard
-          originNode={originNode}
-          file={file}
-          fileList={currFileList}
-          actions={actions}
-        />
-      );
+      return <EmsFileInputCard originNode={originNode} file={file} fileList={currFileList} actions={actions} />;
     },
   };
 
   return (
-    <Upload {...props} {...uploadProps} className={clsx('ems-file-upload', props.className)}>
+    <Upload {...props} {...uploadProps} className={clsx("ems-file-upload", props.className)}>
       <div>
         <input
           type="file"
           disabled={props.disabled}
-          className={clsx('custom-upload-input', props.textInputClassName)}
+          className={clsx("custom-upload-input", props.textInputClassName)}
           id={props.id}
-          autoComplete={'off'}
+          autoComplete={"off"}
           onClick={(e) => e.preventDefault()}
         />
         {props.helperText && <>{props.helperText}</>}
@@ -156,13 +146,13 @@ async function refreshToken() {
     const refreshToken = Cookies.get(AuthConstant.RefreshTokenCookieName);
 
     if (refreshToken) {
-      const baseURL = process.env.NEXT_PUBLIC_BACKEND_API_URL ?? '/';
+      const baseURL = process.env.NEXT_PUBLIC_BACKEND_API_URL ?? "/";
       const response = await fetch(`${baseURL}api/Users/refreshToken`, {
-        method: 'POST',
+        method: "POST",
         body: JSON.stringify({ refreshToken }),
         headers: {
-          'Content-Type': 'application/json',
-          Accept: 'application/json',
+          "Content-Type": "application/json",
+          Accept: "application/json",
         },
       });
 
