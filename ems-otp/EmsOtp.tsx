@@ -1,7 +1,7 @@
-"use client";
+'use client';
 
-import { Input } from "antd";
-import "./EmsOtp.scss";
+import { Input } from 'antd';
+import './EmsOtp.scss';
 
 type Props = {
   id: string;
@@ -9,7 +9,9 @@ type Props = {
 };
 
 function EmsOtp(props: Props) {
-  return <Input.OTP id={props.id} formatter={(str) => str.toUpperCase()} onChange={props.onChange} />;
+  return (
+    <Input.OTP id={props.id} formatter={(str) => str.toUpperCase()} onChange={props.onChange} />
+  );
 }
 
 export default EmsOtp;
