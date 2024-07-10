@@ -6,6 +6,7 @@ import { useTranslations } from 'next-intl';
 import Image from 'next/image';
 import Link from 'next/link';
 import { FunctionComponent, memo, useMemo } from 'react';
+import clsx from 'clsx';
 
 interface EmptyItemProps {
   page: string;
@@ -18,6 +19,7 @@ interface EmptyItemProps {
   afterSearch?: boolean;
   customViewAllTitle?: string;
   viewAll?: () => void;
+  className?: string;
 }
 
 const EmptyItem: FunctionComponent<EmptyItemProps> = ({
@@ -31,6 +33,7 @@ const EmptyItem: FunctionComponent<EmptyItemProps> = ({
   afterSearch,
   customViewAllTitle,
   viewAll,
+  className
 }) => {
   const t = useTranslations();
 
@@ -56,7 +59,7 @@ const EmptyItem: FunctionComponent<EmptyItemProps> = ({
   }, [customViewAllTitle, item, t]);
 
   return (
-    <div className="col m-auto mt-[142px] items-center justify-center">
+    <div className={clsx("col m-auto mt-[142px] items-center justify-center", className)}>
       <div className="relative size-[200px]">
         <Image
           alt="Empty item img"
