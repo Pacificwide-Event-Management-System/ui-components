@@ -13,3 +13,11 @@
     }
   }
 }
+
+.ant-switch.ant-switch-checked {
+  background: #65C466;
+}
+
+.ant-switch.ant-switch-checked:hover:not(.ant-switch-disabled) {
+  background: #65C466;
+}

@@ -17,8 +17,6 @@ function EmsSwitch(props: Props & SwitchProps) {
           },
           props.className,
         )}
-        checkedChildren={<div className="h-[10px] w-[1px] bg-neutral-8"></div>}
-        unCheckedChildren={<div className="h-[10px] w-[1px] bg-neutral-8"></div>}
       ></Switch>
     </>
   );
