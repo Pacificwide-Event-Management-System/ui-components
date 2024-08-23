@@ -52,7 +52,6 @@ export const EmsSnackbar = forwardRef<HTMLDivElement, EmsSnackbarProps>(
           )}
           {variant == 'info' && (
             <>
-              <Image src={Info.src} width={16} height={16} alt="" />
               <div className="text-sm font-normal">{message}</div>
               <Image
                 src={Close.src}
