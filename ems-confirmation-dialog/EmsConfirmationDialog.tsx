@@ -43,17 +43,18 @@ const EmsConfirmationDialog = (props: EmsConfirmationDialogContainerProps) => {
     setDialogOpen(false);
     removeDialog();
     props.resolve(undefined);
-    console.log('test')
+    console.log('test');
   };
 
   return (
     <Modal show={dialogOpen} size={props.size} onClose={onCloseDialog} popup className="z-[1020]">
-      <Modal.Header />
+      <Modal.Header className="p-6">
+        <EmsTypo variant="h5" className="!mb-0">
+          {props.title}
+        </EmsTypo>
+      </Modal.Header>
       <Modal.Body>
         <div>
-          <EmsTypo variant="h5" className="mb-5">
-            {props.title}
-          </EmsTypo>
           <p className="mb-8 whitespace-pre-line text-lg font-normal">{props.message}</p>
           <div className="flex justify-between gap-4">
             <EmsButton
