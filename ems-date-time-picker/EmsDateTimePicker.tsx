@@ -26,11 +26,13 @@ type Props = {
 };
 
 // Custom components
-function EmsDateTimePicker(props: Props & Omit<DatePickerProps, 'minDate' | 'maxDate' | 'defaultValue'>) {
+function EmsDateTimePicker(
+  props: Props & Omit<DatePickerProps, 'minDate' | 'maxDate' | 'defaultValue'>,
+) {
   return (
     <DatePicker
       {...props}
-      format={DateTimePickerFormat}
+      format={props.format ? props.format : DateTimePickerFormat}
       needConfirm={false}
       className={clsx(
         'flex !h-10 w-full items-center rounded-lg border border-neutral-5 px-3 !text-base text-neutral-1 !outline-[0] hover:border-primary-2',
