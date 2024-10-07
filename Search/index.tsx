@@ -2,12 +2,14 @@
 
 import EmsTextField from '@/app/_components/ems-text-field/EmsTextField';
 import SearchIcon from '@/static/speaker-event/SearchIcon';
+import clsx from 'clsx';
 import { useTranslations } from 'next-intl';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import { memo, useCallback, useEffect, useState } from 'react';
 
 type Props = {
   placeholder?: string;
+  className?: string;
 };
 
 const Search = (props: Props) => {
@@ -42,7 +44,7 @@ const Search = (props: Props) => {
   }, [searchParams]);
 
   return (
-    <div className="w-[330px]">
+    <div className={clsx('w-[330px]', props.className)}>
       <EmsTextField
         prefix={
           <div className="mr-2">
