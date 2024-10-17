@@ -2,11 +2,11 @@ import EmsButton from '@/app/_components/ems-button/EmsButton';
 import EmsTypo from '@/app/_components/ems-typo/EmsTypo';
 import Empty_Item from '@/static/empty-item/empty-item.svg';
 import Empty_Search from '@/static/empty-search/empty-search.svg';
+import clsx from 'clsx';
 import { useTranslations } from 'next-intl';
 import Image from 'next/image';
 import Link from 'next/link';
 import { FunctionComponent, memo, useMemo } from 'react';
-import clsx from 'clsx';
 
 interface EmptyItemProps {
   page: string;
@@ -20,6 +20,7 @@ interface EmptyItemProps {
   customViewAllTitle?: string;
   viewAll?: () => void;
   className?: string;
+  createDesc?: boolean;
 }
 
 const EmptyItem: FunctionComponent<EmptyItemProps> = ({
@@ -33,7 +34,8 @@ const EmptyItem: FunctionComponent<EmptyItemProps> = ({
   afterSearch,
   customViewAllTitle,
   viewAll,
-  className
+  className,
+  createDesc,
 }) => {
   const t = useTranslations();
 
@@ -45,7 +47,7 @@ const EmptyItem: FunctionComponent<EmptyItemProps> = ({
     return t(
       afterSearch
         ? 'empty_search.desc'
-        : page === 'event'
+        : page === 'event' || createDesc
           ? 'empty_item.desc_create'
           : 'empty_item.desc',
       { item: item?.toString() },
@@ -59,7 +61,7 @@ const EmptyItem: FunctionComponent<EmptyItemProps> = ({
   }, [customViewAllTitle, item, t]);
 
   return (
-    <div className={clsx("col m-auto mt-[142px] items-center justify-center", className)}>
+    <div className={clsx('col m-auto mt-[142px] items-center justify-center', className)}>
       <div className="relative size-[200px]">
         <Image
           alt="Empty item img"
@@ -91,7 +93,11 @@ const EmptyItem: FunctionComponent<EmptyItemProps> = ({
       {!afterSearch &&
         (createLink ? (
           <Link href={createLink}>
-            <EmsButton variant="primary" label={titleButton} className="!px-[50px] !py-4" />
+            <EmsButton
+              variant="primary"
+              label={titleButton}
+              className="flex min-w-[200px] items-center justify-center !p-4"
+            />
           </Link>
         ) : (
           titleButton && (
@@ -99,7 +105,7 @@ const EmptyItem: FunctionComponent<EmptyItemProps> = ({
               variant="primary"
               onClick={funcButton}
               label={titleButton}
-              className="!px-[50px] !py-4"
+              className="flex min-w-[200px] items-center justify-center !p-4"
             />
           )
         ))}
