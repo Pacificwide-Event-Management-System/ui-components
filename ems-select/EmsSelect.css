@@ -2,10 +2,6 @@
   @apply border border-neutral-6 shadow-sm;
 }
 
-.rc-virtual-list-holder-inner {
-  @apply gap-1;
-}
-
 .rc-virtual-list-holder-inner .ant-select-item.ant-select-item-option {
   @apply rounded-lg;
 }
