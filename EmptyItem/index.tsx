@@ -21,6 +21,7 @@ interface EmptyItemProps {
   viewAll?: () => void;
   className?: string;
   createDesc?: boolean;
+  disabledButtonCreate?: boolean;
 }
 
 const EmptyItem: FunctionComponent<EmptyItemProps> = ({
@@ -36,6 +37,7 @@ const EmptyItem: FunctionComponent<EmptyItemProps> = ({
   viewAll,
   className,
   createDesc,
+  disabledButtonCreate,
 }) => {
   const t = useTranslations();
 
@@ -91,7 +93,7 @@ const EmptyItem: FunctionComponent<EmptyItemProps> = ({
       )}
 
       {!afterSearch &&
-        (createLink ? (
+        (createLink && !disabledButtonCreate ? (
           <Link href={createLink}>
             <EmsButton
               variant="primary"
@@ -106,6 +108,7 @@ const EmptyItem: FunctionComponent<EmptyItemProps> = ({
               onClick={funcButton}
               label={titleButton}
               className="flex min-w-[200px] items-center justify-center !p-4"
+              disabled={disabledButtonCreate}
             />
           )
         ))}
