@@ -2,6 +2,7 @@ import EmsButton from '@/app/_components/ems-button/EmsButton';
 import EmsTypo from '@/app/_components/ems-typo/EmsTypo';
 import Empty_Item from '@/static/empty-item/empty-item.svg';
 import Empty_Search from '@/static/empty-search/empty-search.svg';
+import { Tooltip } from 'antd';
 import clsx from 'clsx';
 import { useTranslations } from 'next-intl';
 import Image from 'next/image';
@@ -22,6 +23,7 @@ interface EmptyItemProps {
   className?: string;
   createDesc?: boolean;
   disabledButtonCreate?: boolean;
+  tooltipTitleCreateButton?: string;
 }
 
 const EmptyItem: FunctionComponent<EmptyItemProps> = ({
@@ -38,6 +40,7 @@ const EmptyItem: FunctionComponent<EmptyItemProps> = ({
   className,
   createDesc,
   disabledButtonCreate,
+  tooltipTitleCreateButton,
 }) => {
   const t = useTranslations();
 
@@ -103,13 +106,17 @@ const EmptyItem: FunctionComponent<EmptyItemProps> = ({
           </Link>
         ) : (
           titleButton && (
-            <EmsButton
-              variant="primary"
-              onClick={funcButton}
-              label={titleButton}
-              className="flex min-w-[200px] items-center justify-center !p-4"
-              disabled={disabledButtonCreate}
-            />
+            <Tooltip title={tooltipTitleCreateButton}>
+              <div>
+                <EmsButton
+                  variant="primary"
+                  onClick={funcButton}
+                  label={titleButton}
+                  className="flex min-w-[200px] items-center justify-center !p-4"
+                  disabled={disabledButtonCreate}
+                />
+              </div>
+            </Tooltip>
           )
         ))}
     </div>
