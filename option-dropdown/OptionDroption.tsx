@@ -17,7 +17,7 @@ const OptionDropdown = (props: Props) => (
     <button
       type="button"
       className={clsx(
-        'group absolute right-4 top-4 flex size-[36px] cursor-pointer items-center justify-center rounded-[50%] border-2 border-transparent bg-white hover:border-primary-3',
+        'group absolute right-4 top-4 flex size-[36px] cursor-pointer items-center justify-center rounded-[50%] border border-transparent bg-white hover:!border-primary-3',
         props.className,
       )}
     >
