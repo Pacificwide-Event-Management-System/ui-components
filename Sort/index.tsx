@@ -1,14 +1,15 @@
 'use client';
 
 import EmsSelect from '@/app/_components/ems-select/EmsSelect';
-import ArrowSort from '@/static/icons/ArrowSort';
 import clsx from 'clsx';
 import { useTranslations } from 'next-intl';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import { memo, useCallback, useState } from 'react';
+import ArrowSort from './ArrowSort';
 
 interface SortProps {
   options: any;
+  selectClassName?: string;
 }
 
 const Sort = (props: SortProps) => {
@@ -46,7 +47,7 @@ const Sort = (props: SortProps) => {
     <div className="flex items-center gap-3">
       <span className="text-neutral-1">{t('common.sort')}</span>
       <EmsSelect
-        className="w-[196px]"
+        className={clsx('w-[196px]', props.selectClassName)}
         onChange={handleSortOptionChange}
         placeholder={t('event_page.category')}
         options={props.options}
