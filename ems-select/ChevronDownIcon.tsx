@@ -1,20 +1,11 @@
-import { Select, SelectProps } from 'antd';
-import clsx from 'clsx';
-import ChevronDownIcon from './ChevronDownIcon';
-import './EmsSelect.css';
-
-function EmsSelect(props: SelectProps) {
+export default function ChevronDownIcon({ color = '#6B6566' }: { color?: string }) {
   return (
-    <Select
-      {...props}
-      suffixIcon={<ChevronDownIcon />}
-      className={clsx(
-        'h-10 !text-base text-neutral-1',
-        props.disabled ? '[&_.ant-select-selector]:!bg-neutral-7' : '',
-        props.className,
-      )}
-    />
+    <svg height="24" width="24" fill="none" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+      <path
+        d="M6.41438 9.53151C6.67313 9.20806 7.1451 9.15562 7.46855 9.41438L12 13.0396L16.5315 9.41438C16.855 9.15562 17.3269 9.20806 17.5857 9.53151C17.8444 9.85495 17.792 10.3269 17.4685 10.5857L12.4685 14.5857C12.1946 14.8048 11.8054 14.8048 11.5315 14.5857L6.53151 10.5857C6.20806 10.3269 6.15562 9.85495 6.41438 9.53151Z"
+        fill="#A39D9E"
+        fillRule="evenodd"
+      />
+    </svg>
   );
 }
-
-export default EmsSelect;
