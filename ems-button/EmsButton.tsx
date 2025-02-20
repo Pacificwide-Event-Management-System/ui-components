@@ -1,5 +1,5 @@
 import clsx from 'clsx';
-import { Component, FunctionComponent, MouseEventHandler } from 'react';
+import { Component, CSSProperties, FunctionComponent, MouseEventHandler } from 'react';
 import { EmsLoadingIndicator } from '../ems-loading-indicator/EmsLoadingIndicator';
 
 type Props = {
@@ -16,6 +16,7 @@ type Props = {
   required?: boolean;
   className?: string;
   icon?: Component;
+  style?: CSSProperties;
   onClick?: MouseEventHandler<HTMLButtonElement>;
 };
 
@@ -110,6 +111,7 @@ const EmsButton: FunctionComponent<Props> = (props) => {
   return (
     <button
       className={clsx(getButtonClassName(), props.className)}
+      style={props.style}
       type={props.type ?? 'button'}
       onClick={props.onClick}
       disabled={props.disabled}
