@@ -24,6 +24,8 @@ interface EmptyItemProps {
   createDesc?: boolean;
   disabledButtonCreate?: boolean;
   tooltipTitleCreateButton?: string;
+  hideTitleButton?: boolean;
+  isWithdrawalPage?: boolean;
 }
 
 const EmptyItem: FunctionComponent<EmptyItemProps> = ({
@@ -41,6 +43,8 @@ const EmptyItem: FunctionComponent<EmptyItemProps> = ({
   createDesc,
   disabledButtonCreate,
   tooltipTitleCreateButton,
+  hideTitleButton = false,
+  isWithdrawalPage = false,
 }) => {
   const t = useTranslations();
 
@@ -84,7 +88,9 @@ const EmptyItem: FunctionComponent<EmptyItemProps> = ({
             : t('empty_item.attendee_desc')
           : isManualEmailPage
             ? t('empty_item.manual_email_desc')
-            : commonDesc}
+            : isWithdrawalPage
+              ? t('empty_item.withdrawal_desc')
+              : commonDesc}
       </EmsTypo>
       {afterSearch && (
         <EmsButton
@@ -96,6 +102,7 @@ const EmptyItem: FunctionComponent<EmptyItemProps> = ({
       )}
 
       {!afterSearch &&
+        !hideTitleButton &&
         (createLink && !disabledButtonCreate ? (
           <Link href={createLink}>
             <EmsButton
