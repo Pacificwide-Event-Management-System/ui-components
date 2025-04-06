@@ -1,3 +1,5 @@
+'use client';
+
 import { Typography } from 'antd';
 import { EllipsisConfig } from 'antd/es/typography/Base';
 import clsx from 'clsx';
